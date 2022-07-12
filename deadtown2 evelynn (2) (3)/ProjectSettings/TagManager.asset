@@ -52,3 +52,9 @@ TagManager:
   - name: wall
     uniqueID: 565657715
     locked: 0
+  - name: UI
+    uniqueID: 3068945995
+    locked: 0
+  - name: Inven
+    uniqueID: 2796151765
+    locked: 0
