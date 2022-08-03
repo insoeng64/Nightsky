@@ -119,13 +119,13 @@ TextureImporter:
       name: "\uCEA1\uCC98-removebg-preview_0"
       rect:
         serializedVersion: 2
-        x: 27
-        y: 25
+        x: 29
+        y: 286
         width: 279
-        height: 327
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 65}
       outline: []
       physicsShape: []
       tessellationDetail: 0

@@ -1,61 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class Playermove : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Joystick speed;
+    public GameObject handle;
+    public FloatingJoystick Direction;
     Rigidbody rigid;
     Rigidbody2D rig;
     SpriteRenderer SpriteRend;
     Animator ani;
     public static bool isRight = true;
     Vector2 Inputmouseposition;
+    public Image runhandle;
+    public Color color;
+    
 
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         SpriteRend = GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 mouseposition_gap;
-        Vector2 previousmouseposition = Inputmouseposition;
-        Inputmouseposition=Input.mousePosition;
-        mouseposition_gap = Inputmouseposition - previousmouseposition;
-       
+        float x_val = Direction.Horizontal;
+        float y_val = Direction.Vertical;
+        for (int i=0;i<Input.touchCount; i++)
+        {
+            if (Input.GetTouch(i).position.x>1500)
+            {
+                Inputmouseposition = Input.GetTouch(i).deltaPosition;
+                if (handle.activeSelf==false)
+                {
+                    if (Inputmouseposition.x > 0)
+                    {
+                        transform.Rotate(0, 0, Time.deltaTime * (Inputmouseposition.x * 10), Space.Self);
+                    }
+                    if (Inputmouseposition.x < 0)
+                    {
+                        transform.Rotate(0, 0, Time.deltaTime * (Inputmouseposition.x * 10), Space.Self);
+                    }
+                }
+            }
+        }
+      
         //캐릭터 이동 스크립트
-        if (Input.GetKey(KeyCode.W))
+        
+
+        if (speed.run == true)
         {
-            ani.SetBool("walk", true);
+            runhandle.color = new Color32(255, 255, 255, 255);
         }
-        else if (Input.GetKey(KeyCode.S))
+
+        if (speed.run == false)
         {
-            ani.SetBool("walk", true);
+            runhandle.color = new Color32(255, 255, 255, 140);
         }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            ani.SetBool("walk", true);
-        }
-        else if (Input.GetKey(KeyCode.D))
+        if (x_val != 0||y_val!=0)
         {
             ani.SetBool("walk", true);
         }
         else
-        {
             ani.SetBool("walk", false);
-        }
-
-       
-
-
-        transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z+ mouseposition_gap.x*-0.5f);
-
-
+        Debug.Log(speed.speed);
 
     }//캐릭터 이동 스크립트
      void FixedUpdate()
@@ -74,8 +87,15 @@ public class Playermove : MonoBehaviour
         {
             ani.SetBool("attack doki", false);
         }
+        float x_val = Direction.Horizontal;
+        float y_val = Direction.Vertical;
+
+        transform.Translate(new Vector2(x_val * speed.speed, 0));
+            transform.Translate(new Vector2(0, y_val * speed.speed));
+        
 
 
     }
-    }
+    
+}
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Item_inven : Panel
 {
-    public GameObject Items_inven;
     
     // Start is called before the first frame update
     void Start()
@@ -17,18 +16,11 @@ public class Item_inven : Panel
     {
        
     }
-    private void GetButtonDown()
+    public void OnclickItem()
     {
-        Inven_stage = Inven_stage + 1;
+            
 
-        if (In % 2 == 0)
-        {
-            panel.SetActive(false);
-        }
-        else if (a % 2 != 0)
-        {
-            panel.SetActive(true);
-            pause = true;
-        }
+           
     }
+    
 }
